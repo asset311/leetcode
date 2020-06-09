@@ -35,6 +35,8 @@ def max_subarray_sum(l:list) -> int:
     return msum
 
 # optimal solution that runs in O(n)
+# n = (-2,1,-3,4,-1,2,1,-5,4)
+# Kadane's algorithm is able to find the maximum sum of a contiguous subarray in an array with a runtime of O(n)
 def maxSubArray(nums) -> int:
     total_sum = max_sum = nums[0]
 
