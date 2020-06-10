@@ -15,8 +15,9 @@ def maxSum(numbers:list, k:int) -> int:
     mSum = wSum = 0
 
     #find the sum of initial window of size k
-    for i in numbers[:k]:
-        wSum += i
+    #for i in numbers[:k]:
+    #    wSum += i
+    wSum = sum(numbers[:k])
 
     end = k
     while end < len(numbers):
