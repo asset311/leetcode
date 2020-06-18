@@ -24,7 +24,8 @@ def isValid(s:str) -> bool:
         else:
             left_chars.append(c)
         return not left_chars
-    
+
+# correct version    
 def isValid(s:str) -> bool:
     left_chars = []
     lookup = {'(':')', '{':'}', '[':']'}
