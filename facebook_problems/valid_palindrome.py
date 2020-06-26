@@ -31,3 +31,6 @@ def isPalindrome(s:str) -> bool:
             return False
         start, end = start+1, end-1
     return True
+
+# there is a way to solve this with a stack and queue, but requires more space
+# also harder to deal with non-alphanumeric characters
