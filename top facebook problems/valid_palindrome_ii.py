@@ -7,6 +7,7 @@ a palindrome after removing exactly one character from this.
 
 Note:
 It is not the same as saying - can we make a palindrome if we remove one character, meaning by removing and rearranging.
+Hint: https://www.geeksforgeeks.org/remove-character-string-make-palindrome/
 '''
 
 # Greedy approach
