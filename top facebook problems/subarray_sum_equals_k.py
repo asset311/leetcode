@@ -41,7 +41,7 @@ def subarraySum(nums, k:int) -> int:
     for num in nums:
         s += num      # update current cumulative sum
         if (s-k) in sumdict:
-            count += sumdict[s-k]
+            count += sumdict[s-k]   #add count this sum appeared previously
         if s in sumdict:    # we already saw subarray with that sum
             sumdict[s] += 1
         else:
