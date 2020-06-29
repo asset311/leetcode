@@ -113,7 +113,7 @@ def add_binary_nums(x, y):
         r += 1 if x[i] == '1' else 0
         r += 1 if y[i] == '1' else 0
         result = ('1' if r % 2 == 1 else '0') + result 
-        carry = 0 if r < 2 else 1     # Compute the carry. 
+        carry = 0 if r < 2 else 1     # Compute the carry. carry = r // 2
       
     if carry !=0 : result = '1' + result 
 
