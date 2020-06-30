@@ -24,12 +24,12 @@ Explanation: In this case, no transaction is done, i.e. max profit = 0.
 # Space is O(1) since we only keep a couple of additional variables
 def maxProfit(self, prices: List[int]) -> int:
     
-    max_profit = 0
     if len(prices) == 0:
-        return max_profit
+        return 0
     
     min_price = prices[0]
-    
+    max_profit = price[1] - prices[0]
+
     for price in prices[1:]:
         max_profit = max(max_profit, price - min_price)
         min_price = min(min_price, price)
