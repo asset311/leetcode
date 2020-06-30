@@ -7,6 +7,8 @@ Do not allocate extra space for another array, you must do this by modifying the
 You may assume all the characters consist of printable ascii characters.
 
 '''
+# Technique - two pointers
+
 
 from typing import List
 
