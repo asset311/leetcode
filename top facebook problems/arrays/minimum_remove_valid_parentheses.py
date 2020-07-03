@@ -51,11 +51,11 @@ def minRemoveToMakeValid(s: str) -> str:
                 continue
             if c == "(":
                 stack.append(i)
-            elif not stack:
+            elif not stack: #stack empty, no corresponding opening bracket
                 indexes_to_remove.add(i)
             else:
                 stack.pop()
-        indexes_to_remove = indexes_to_remove.union(set(stack))
+        indexes_to_remove = indexes_to_remove.union(set(stack)) # we maintain a set, because it is O(1) lookup
         string_builder = []
         for i, c in enumerate(s):
             if i not in indexes_to_remove:
