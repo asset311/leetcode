@@ -48,7 +48,7 @@ def mergeTwoLists(l1: ListNode, l2: ListNode) -> ListNode:
     #prev always points to the previous node
     prev = prehead
     while l1 and l2:
-        if l1.val < l2.val:
+        if l1.val <= l2.val:
             prev.next = l1
             l1 = l1.next
         else:
@@ -57,7 +57,7 @@ def mergeTwoLists(l1: ListNode, l2: ListNode) -> ListNode:
 
         prev = prev.next
     
-    prev.next = l1 if not l1 else l2
+    prev.next = l1 if l1 else l2
 
     # exactly one of l1 and l2 can be non-null at this point, so connect
     # the non-null list to the end of the merged list.
