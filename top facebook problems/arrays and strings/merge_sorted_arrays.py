@@ -62,7 +62,7 @@ def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
             a[write_indx] = nums1[a]
             a -= 1
         else:
-            A[write_indx] = nums2[b]
+            a[write_indx] = nums2[b]
             b -= 1
         write_indx -= 1
 
