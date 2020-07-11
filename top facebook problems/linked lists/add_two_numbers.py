@@ -1,4 +1,8 @@
 
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
 # Time complexity is O(m+n) where m and n are number of elements in lists
 # Space is O(m+n) - the resulting list is at most m+n+1 (if there is carry in the end)

@@ -54,7 +54,6 @@ def mergeTwoLists(l1: ListNode, l2: ListNode) -> ListNode:
         else:
             prev.next = l2
             l2 = l2.next
-
         prev = prev.next
     
     prev.next = l1 if l1 else l2
