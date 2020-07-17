@@ -5,7 +5,6 @@ class TreeNode:
         self.left = left
         self.right = right
 
-
 class Solution:
     
     # computes tree height via recursion
@@ -31,3 +30,34 @@ class Solution:
             return False
         else:
             return self.isBalanced(root.left) and self.isBalanced(root.right)
+
+# combine height and status into one via a named tuple
+# at each point we need to know the subtrees height, and whether it is balanced
+from collections import namedtuple
+class Solution:
+    def isBalanced(self, root: TreeNode) -> bool:
+        NodeWithHeightAndBalancedStatus = namedtuple('NodeWithHeightAndBalancedStatus', 'is_balanced height')
+
+        def check_balanced(root):
+            # if at the leaf, it is balanced and it's height is -1
+            if not root:
+                return NodeWithHeightAndBalancedStatus(True, -1)
+            
+            # check left subtree
+            left_result = check_balanced(root.left)
+            if not left_result.is_balanced:
+                return NodeWithHeightAndBalancedStatus(False, 0)
+            
+            # check right subtree
+            right_result = check_balanced(root.right)
+            if not right_result.is_balanced:
+                return NodeWithHeightAndBalancedStatus(False, 0)
+            
+            # if both subtrees are balanced, then this node is only balanced
+            # if the difference between subtree heights is at most one
+            height = 1 + max(left_result.height, right_result.height)
+            is_balanced = abs(left_result.height - right_result.height) <= 1
+
+            return NodeWithHeightAndBalancedStatus(is_balanced, height)
+        
+        return check_balanced(root).is_balanced
