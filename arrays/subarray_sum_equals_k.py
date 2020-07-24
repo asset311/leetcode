@@ -34,7 +34,6 @@ def subarraySum(nums, k):
 def subarraySum(nums, k:int) -> int:
 
     sumdict = {0:1}     # dictionary of cumulative sums and their count
-    n = len(nums)       # total nums length
     s = 0               # variable to hold current cumulative sum
     count = 0           # final counter to output
 

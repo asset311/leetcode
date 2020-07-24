@@ -12,7 +12,7 @@ Note:
 You must do this in-place without making a copy of the array.
 Minimize the total number of operations.
 '''
-
+from typing import List
 # Approach 1: use additional array
 def moveZeroes(nums: List[int]) -> None:
     """
@@ -42,6 +42,6 @@ def moveZeroes(nums: List[int]) -> None:
             k += 1
         
     # need to populate the rest with 0
-    if n-k > 0:
-        for j in range(k,n):
-            nums[j] = 0
+    while k < len(nums):
+        nums[k] = 0 
+        k += 1

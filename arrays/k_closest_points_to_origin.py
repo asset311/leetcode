@@ -24,9 +24,10 @@ Output: [[3,3],[-2,4]]
 (The answer [[-2,4],[3,3]] would also be accepted.)
 '''
 
-# Approach 1: Use a custom sort function to sort points on the plane based on their distance to origin
 import math
+from typing import List
 
+# Approach 1: Use a custom sort function to sort points on the plane based on their distance to origin
 # Time is O(nlog(n)) in the best case for sorting
 # Space is O(1) - all modifications are in-place
 def kClosest(self, points: List[List[int]], K: int) -> List[List[int]]:
@@ -36,5 +37,17 @@ def kClosest(self, points: List[List[int]], K: int) -> List[List[int]]:
     points.sort(key=euclid)
     return points[:K]
 
-# Approach 2: Divide and conquer to do better than O(nlog(n))
-#  
+# Approach 2: Use a heap
+# Time is O(N log(K))
+# Space is O(K) to store K elements
+import heapq as hq
+def kClosest(self, points: List[List[int]], K: int) -> List[List[int]]:
+    if not K:
+        return []
+    
+    q = [(x**2 + y**2, [x,y]) for x, y in points]
+
+    # no need to heapify prior
+    return list(map(lambda x:x[1], hq.nsmallest(K, q)))
+
+

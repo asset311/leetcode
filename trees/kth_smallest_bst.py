@@ -40,7 +40,7 @@ def kthSmallest(self, root:TreeNode, k:int) -> int:
 ## RECURSIVE SOLUTION ##
 ## inorder search on BST will give sorted list ##
 def inorder(root):
-    if root is None:
+    if not root:
         return []
     else:
          return inorder(root.left) + [root.val] + inorder(root.right)

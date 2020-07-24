@@ -39,22 +39,22 @@ class Solution:
 # Space is O(1)
 class Solution:
     def reverseList(self, head: ListNode) -> ListNode:
-        prev = None
-        curr = head
-        
-        while curr:
-            curr_next = curr.next
-            curr.next = prev
-            prev = curr
-            curr = curr_next
-        return prev
-
-# pythonic implementation without temporary vars
-class Solution:
-    def reverseList(self, head: ListNode) -> ListNode:
         prev, curr = None, head
 
         while curr:
             curr.next, prev, curr = prev, curr, curr.next
         
         return prev
+
+# Approach 3: recursive
+# Time is O(n)
+# Space is O(n) for the function call stack
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        if not head or not head.next:
+            return head
+        
+        new_head = self.reverseList(head.next)
+        head.next.next = head
+        head.next = None
+        return new_head

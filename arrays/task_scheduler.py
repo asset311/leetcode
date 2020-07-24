@@ -14,7 +14,7 @@ from collections import Counter
 # Space complexity is O(1) - we store an array of at most 26 slots
 def leastInterval(tasks: List[str], n: int) -> int:
     tasks_counter = Counter(tasks)
-    frequencies = sorted(tasks_counter.values())  # frequencies of tasks in descending order
+    frequencies = sorted(tasks_counter.values())  # frequencies of tasks in ascending order
 
     # max frequency
     f_max = frequencies.pop()
