@@ -20,21 +20,32 @@ class TreeNode:
 # Approach 1: recursive
 # Time is O(N) where N is the number of nodes
 # Space is O(N) as there will be N calls onto the function call stack
-def isValidBST(self, root: TreeNode) -> bool:
-    
-    lower_bound = -float('inf')
-    upper_bound = float('inf')
-    
-    def is_valid_bst(root, lower_bound, upper_bound):
-        if not root:
-            return True
+class Solution:
+    def isValidBST(self, root: TreeNode) -> bool:
+        min_value = -float('inf')
+        max_value = float('inf')
         
-        if (root.val <= lower_bound) or (root.val >= upper_bound):
-            return False
+        def bstChecker(root, min_value, max_value):
+            if not root:
+                return True
+            
+            # divide
+            left_tree = root.left
+            right_tree = root.right
+            
+            # conquer
+            # this checks
+            # The left subtree of a node contains only nodes with keys less than the node's key.
+            # The right subtree of a node contains only nodes with keys greater than the node's key.
+            if (root.val >= max_value) or (root.val <= min_value):
+                return False
+            
+            # combine
+            # finally checks that both subtrees are BST
+            return all([bstChecker(left_tree, min_value, root.val),
+                       bstChecker(right_tree, root.val, max_value)])
         
-        return is_valid_bst(root.left, lower_bound, root.val) and is_valid_bst(root.right, root.val, upper_bound)
-    
-    return is_valid_bst(root, lower_bound, upper_bound)
+        return bstChecker(root, min_value, max_value)
 
 
 # Approach 2: Iterative, the same principle
@@ -50,15 +61,44 @@ def isValidBST(self, root: TreeNode) -> bool:
 
     # preorder traversal
     while node_and_bounds_stack:
-        node, lower_bound, upper_bound = node_and_bounds_stack.pop()
+        node, min_value, max_value = node_and_bounds_stack.pop()
         
-        if (node.val <= lower_bound) or (node.val >= upper_bound):
+        if (node.val <= min_value) or (node.val >= max_value):
             return False
         
         if node.right:
-            node_and_bounds_stack.append( (node.right, node.val, upper_bound) )
+            node_and_bounds_stack.append( (node.right, node.val, max_value) )
 
         if node.left:
-            node_and_bounds_stack.append( (node.left, lower_bound, node.val) )
+            node_and_bounds_stack.append( (node.left, min_value, node.val) )
     
     return True
+
+
+# Approach 3: Inorder traversal - the most efficient out of all three
+class Solution:
+    def isValidBST(self, root: TreeNode) -> bool:
+        
+        if not root:
+            return True
+        
+        stack = []
+        prev = None
+
+        while stack or root:
+            while root:
+                stack.append(root)
+                root = root.left
+            
+            root = stack.pop()
+            
+            # If next element in inorder traversal
+            # is smaller than the previous one
+            # that's not BST.
+            if prev and root.val <= prev.val:
+                return False
+            
+            prev = root
+            root = root.right
+
+        return True

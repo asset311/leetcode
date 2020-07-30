@@ -13,6 +13,8 @@ class TreeNode:
         self.left = left
         self.right = right
 
+
+# Approach 1: Recursive - divide and conquer
 class Solution:
     def maxDepth(self, root: TreeNode) -> int:
         if not root:
@@ -21,3 +23,23 @@ class Solution:
         right = self.maxDepth(root.right)
         
         return max(left, right) + 1
+
+# Approach 2: Recursive DFS (preorder)
+# preorder because at each node we calculate if the depth at this node is larger than the global maxdepth so far
+class Solution:
+    def maxDepth(self, root: TreeNode) -> int:
+        depth = 0
+
+        def preorder(root, curr_depth):
+            nonlocal depth
+            if not root:
+                return
+            
+            depth = max(depth, curr_depth)
+
+            preorder(root.left, curr_depth+1)
+            preorder(root.right, curr_depth+1)
+        
+        preorder(root, 1)
+        return depth
+

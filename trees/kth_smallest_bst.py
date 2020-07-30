@@ -17,24 +17,22 @@ class TreeNode(object):
 
 # Recursive solution
 # Inorder traversal of BST gives sorted list
-def kthSmallest(self, root:TreeNode, k:int) -> int:
-    stack = []
-
-    while True:
-        while root:     # populate with the leftmost subtree
-            stack.append(root)
-            root = root.left
-    
-        root = stack.pop()
-        k -=1
-
-        # if we're at kth smallest, return the value
-        if k == 0:
-            return root.val
-
-        root = root.right   # explore the right, if it exists
-
-
+class Solution:
+    def kthSmallest(self, root: TreeNode, k: int) -> int:
+        
+        # inorder traversal
+        stack = []
+        while root or stack:
+            while root:
+                stack.append(root)
+                root = root.left
+            
+            root = stack.pop()
+            k -=1
+            if k == 0:
+                return root.val
+            
+            root = root.right
 
 
 ## RECURSIVE SOLUTION ##

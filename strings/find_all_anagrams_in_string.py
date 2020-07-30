@@ -2,38 +2,12 @@
 438. Find All Anagrams in a String
 https://leetcode.com/problems/find-all-anagrams-in-a-string/
 
-Given a string s and a non-empty string p, find all the start indices of p's anagrams in s.
-
-Strings consists of lowercase English letters only and the length of both strings s and p will not be larger than 20,100.
-
-The order of output does not matter.
-
-Example 1:
-Input:
-s: "cbaebabacd" p: "abc"
-
-Output:
-[0, 6]
-
-Explanation:
-The substring with start index = 0 is "cba", which is an anagram of "abc".
-The substring with start index = 6 is "bac", which is an anagram of "abc".
-
-Example 2:
-Input:
-s: "abab" p: "ab"
-
-Output:
-[0, 1, 2]
-
-Explanation:
-The substring with start index = 0 is "ab", which is an anagram of "ab".
-The substring with start index = 1 is "ba", which is an anagram of "ab".
-The substring with start index = 2 is "ab", which is an anagram of "ab".
+Pattern - Sliding window
 '''
 from typing import List
 
-# Approach 1: Two words are anagrams if and only if they result in equal strings after sorting 
+# Approach 1: Two words are anagrams if and only if they result in equal strings after sorting
+# Time is O(m log(m) + n log(n)) where m and n are lengths of s and p - since we do sorting
 class Solution:
     def findAnagrams(self, s: str, p: str) -> List[int]:
         p_lst = list(p)
@@ -52,30 +26,10 @@ class Solution:
             
         return indx
 
-# Approach 2: sliding window + counter hashmaps
-# The problem with this implementation is the efficient slicing of the array, so takes a long time for long strings
-from collections import Counter
-class Solution:
-    def findAnagrams(self, s: str, p: str) -> List[int]:
-        
-        indx = []
-        
-        i = 0
-        j = i + len(p)
-        p_counter = Counter(p)
-        
-        while j <= len(s):
-            s_counter = Counter(s[i:j])
-            if s_counter == p_counter:
-                indx.append(i)
-                
-            i, j = i+1, j+1
-            
-        return indx
-
-# The same as approach 2 with efficient implementation of the sliding window
+# Approach 2: sliding window + 2 counters
 # Time is O(m+n) where m and n are lenghts of s and p respectively
-# Space is 
+# Space is O(m+n)
+from collections import Counter
 class Solution:
     def findAnagrams(self, s: str, p: str) -> List[int]:
         indx = []
@@ -100,3 +54,38 @@ class Solution:
                 indx.append(i - np + 1)
         
         return indx
+
+# Approach 3: sliding window + 1 counter
+class Solution:
+    def findAnagrams(self, s: str, p: str) -> List[int]:
+        
+        if len(s) < len(p) or len(s) == 0:
+            return []
+        
+        p_freq = Counter(p)
+        p_counter = len(p_freq)
+        begin = end = 0
+        ans = []
+        
+        while end < len(s):
+            # first traversal and find substring that contains p's chars
+            endchar = s[end]
+            if endchar in p_freq:
+                p_freq[endchar] -=1
+                if p_freq[endchar] == 0: p_counter -=1
+            end += 1
+            
+            while p_counter == 0:
+
+                # check condition
+                # found substring of length of p
+                if end-begin == len(p):
+                    ans.append(begin)
+                
+                beginchar = s[begin]
+                if beginchar in p_freq:
+                    p_freq[beginchar] +=1
+                    if p_freq[beginchar] > 0: p_counter += 1
+                begin += 1
+        
+        return ans

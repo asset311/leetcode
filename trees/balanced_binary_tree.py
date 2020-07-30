@@ -1,3 +1,9 @@
+'''
+110. Balanced Binary Tree
+https://leetcode.com/problems/balanced-binary-tree/
+'''
+
+
 # Definition for a binary tree node.
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
@@ -5,8 +11,10 @@ class TreeNode:
         self.left = left
         self.right = right
 
-class Solution:
-    
+# Approach 1: Divide-and-conquer 
+# Check that current node is height-balanced
+# Then check that both subtrees are also height-balanced
+class Solution:    
     # computes tree height via recursion
     def height(self, root):
         # An empty tree has height -1
@@ -18,14 +26,11 @@ class Solution:
             
         return 1 + max(lheight, rheight)    
     
-    def isBalanced(self, root: TreeNode) -> bool:
-        
+    def isBalanced(self, root: TreeNode) -> bool:        
         # an empty tree is a balanced tree
         if not root:
             return True
-        
-        # check if subtrees have height within 1
-        # if they do, check if subtrees are balanced
+
         if abs(self.height(root.left) - self.height(root.right)) > 1:
             return False
         else:
