@@ -2,7 +2,7 @@
 438. Find All Anagrams in a String
 https://leetcode.com/problems/find-all-anagrams-in-a-string/
 
-Pattern - Sliding window
+Pattern - sliding window
 '''
 from typing import List
 

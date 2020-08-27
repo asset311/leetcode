@@ -44,6 +44,8 @@ class Solution:
                 nr = r + dr[i]
                 nc = c + dc[i]
                 
+                # the next cell must be at most 1 step away from gates
+                # as the neighbouring cell, so if not, upgrade and push back to the queue
                 if nr>=0 and nc>=0 and nr<R and nc<C:
                     if rooms[nr][nc] > rooms[r][c] + 1:
                         rooms[nr][nc] = rooms[r][c] + 1

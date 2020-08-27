@@ -36,18 +36,23 @@ class Solution:
 # Approach 2: DFS
 class Solution:
     def longestStrChain(self, words: List[str]) -> int:
-        
+        # consider this as a graph problem
+        # 'bdca' has edges to ['bca', 'bda','bdc','dca'] etc.
+        # we can do DFS on each 'word' in the set of 'words'
+
+        # keep track of length of sequence for each word
+        # this also acts as visited nodes
+        dp = {word: 0 for word in words}
+
         def dfs(word):
             if word not in dp:  # return if not in the dictionary, base case
                 return 0
             
-            # if not visited yet
+            # each unvisited node has 0 as it's sequence length
             if not dp[word]:
+                # max sequence is stored
                 dp[word] = max([dfs(word[:i]+word[i+1:]) + 1 for i in range(len(word))])
             return dp[word]
-        
-        # keep track of lenght of sequence for each word
-        dp = {word: 0 for word in words}
         
         return max([dfs(word) for word in dp if not dp[word]])
 

@@ -19,17 +19,6 @@ class Solution:
             for j in range(len(M)):
                 if M[v][j] == 1:
                     dfs(j)
-        '''
-        def dfs(v):
-            stack = [v]
-            while stack:
-                current = stack.pop()
-                visited.add(current)
-                
-                for j in range(len(M[current])):
-                    if M[current][j] == 1 and j not in visited:
-                        stack.append(j)
-        '''
                 
         circles = 0
         visited = set()

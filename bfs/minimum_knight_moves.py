@@ -9,6 +9,7 @@ Return the minimum number of steps needed to move the knight to the square [x, y
 
 # Approach: BFS on legal moves
 # This is guaranteed to find the minimum steps, because we count 8 possible moves as 1 step.
+# There is a way to speed it up by only considering the correct quadrant
 
 from collections import deque
 class Solution:
