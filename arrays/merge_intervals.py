@@ -32,3 +32,21 @@ def merge(intervals):
             merged[-1][1] = max(merged[-1][1], interval[1])
     
     return merged
+
+# Different more explicit implementation
+def mergeIntervals(intervals):
+    # allocate a new array to store new intervals
+    intervals.sort()
+    merged = [intervals[0]]
+    # traverse the intervals, merging with the last one
+    # intervals can be merged if a[1] >= b[0], then new interval c = [min(a[0],b[0]), max(a[1], b[1])]
+    # otherwise add the new interval and proceed
+
+    for interval in intervals[1:]:
+        last_merged = merged[-1]
+        if last_merged[1] >= interval[0]:
+            merged[-1] = [min(last_merged[0], interval[0]), max(last_merged[1], interval[1])]
+        else:
+            merged.append(interval)
+    
+    return merged
